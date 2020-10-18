@@ -96,10 +96,10 @@ Vue.component('product', {
           title() {
               return this.brand + ' ' + this.product  
           },
-          image(){
+          image() {
               return this.variants[this.selectedVariant].variantImage
           },
-          inStock(){
+          inStock() {
               return this.variants[this.selectedVariant].variantQuantity
           },
           shipping() {
@@ -119,11 +119,16 @@ Vue.component('product', {
             
             return result;
           },
-      }
-  })
+              countOfPositiveRecommend() {
+      const positiveRecommends = this.reviews.filter(function (item) {
+        return item.recommend === "Yes";
+      });
+      return ((positiveRecommends.length / this.reviews.length).toFixed(1)) * 100; // процент позитивных отзывов
+    },
 
-
-  Vue.component('product-review', {
+  }
+})
+Vue.component('product-review', {
     template: `
       <form class="review-form" @submit.prevent="onSubmit">
       
@@ -166,7 +171,7 @@ Vue.component('product', {
         </label>
             
         <p>
-          <input type="submit" value="Submit">  
+          <input type="submit" value="Submit1">  
         </p>    
       
     </form>
