@@ -43,10 +43,13 @@ Vue.component('product', {
               <p v-if="!reviews.length">There are no reviews yet.</p>
               <ul v-else>
                   <p>Middle mark is {{middle}} based on {{this.reviews.length}} ratings</p>
+                  <p>{{countOfPositiveRecommend}}% would recommend this product</p>
+
                   <li v-for="(review, index) in reviews" :key="index">
                     <p>{{ review.name }}</p>
                     <p>Rating:{{ review.rating }}</p>
                     <p>{{ review.review }}</p>
+                    <p>Would you recommend this product: {{ review.recommend }}</p>
                   </li>
               </ul>
           </div>
