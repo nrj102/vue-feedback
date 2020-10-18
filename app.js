@@ -42,6 +42,7 @@ Vue.component('product', {
           <div>
               <p v-if="!reviews.length">There are no reviews yet.</p>
               <ul v-else>
+                  <p>Middle mark is {{middle}} based on {{this.reviews.length}} ratings</p>
                   <li v-for="(review, index) in reviews" :key="index">
                     <p>{{ review.name }}</p>
                     <p>Rating:{{ review.rating }}</p>
@@ -103,7 +104,18 @@ Vue.component('product', {
               return "Free"
             }
               return 2.99
-          }
+          },
+          middle() {
+            console.log(this.reviews);
+            const ratings = this.reviews.map(function (item) {
+              return item.rating;
+            });
+
+            let sum = ratings.reduce((a, b) => a + b, 0);
+            let result = (sum / ratings.length).toFixed(1);
+            
+            return result;
+          },
       }
   })
 
